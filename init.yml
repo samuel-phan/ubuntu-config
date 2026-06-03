@@ -63,21 +63,13 @@
     #         enable: yes
     #   tags: gnome-extensions
 
-    # - ansible.builtin.import_role:
-    #     name: terminal
-    #   vars:
-    #     terminal_profile_id: "b1dcc9dd-5262-4d8d-a863-c897e6d979b9"
-    #     terminal_use_system_font: "false"
-    #     terminal_font: "'MesloLGS NF 11'"
-    #     use_theme_colors: "false"
-    #     foreground_color: "'rgb(211,215,207)'"
-    #     background_color: "'rgb(46,52,54)'"
-    #     use_transparent_background: "false"
-    #     background_transparency_percent: "10"
-    #     terminal_color_palette: "['rgb(46,52,54)', 'rgb(204,0,0)', 'rgb(78,154,6)', 'rgb(196,160,0)', 'rgb(52,101,164)', 'rgb(117,80,123)', 'rgb(6,152,154)', 'rgb(211,215,207)', 'rgb(85,87,83)', 'rgb(239,41,41)', 'rgb(138,226,52)', 'rgb(252,233,79)', 'rgb(114,159,207)', 'rgb(173,127,168)', 'rgb(52,226,226)', 'rgb(238,238,236)']"
-    #     bold_is_bright: "true"
-    #     terminal_scrollback_lines: "100000"
-    #   tags: terminal
+    - name: Configure Ptyxis terminal
+      ansible.builtin.import_role:
+        name: terminal
+      vars:
+        terminal_scrollback_lines: "100000"
+        terminal_background_opacity: "0.85"
+      tags: terminal
 
     # - ansible.builtin.import_role:
     #     name: bash

@@ -1,0 +1,20 @@
+- name: Read the default profile UUID
+  community.general.dconf:
+    key: "/org/gnome/Ptyxis/default-profile-uuid"
+    state: read
+  register: terminal_default_profile
+
+- name: Set 'terminal_default_profile_uuid' variable
+  ansible.builtin.set_fact:
+    terminal_default_profile_uuid: >-
+      {{ terminal_default_profile.value | ansible.builtin.regex_replace("^'?(\w+)'?$", "\1") }}
+
+- name: 'Set scrollback lines to "{{ terminal_scrollback_lines }}"'
+  community.general.dconf:
+    key: "/org/gnome/Ptyxis/Profiles/{{ terminal_default_profile_uuid }}/scrollback-lines"
+    value: "{{ terminal_scrollback_lines }}"
+
+- name: 'Set background opacity to "{{ terminal_background_opacity }}"'
+  community.general.dconf:
+    key: "/org/gnome/Ptyxis/Profiles/{{ terminal_default_profile_uuid }}/opacity"
+    value: "{{ terminal_background_opacity }}"
