@@ -5,14 +5,14 @@
     insertbefore: '^unset color_prompt force_color_prompt'
 
 - name: Add bash prompt to ~/.bashrc (root)
-  become: yes
+  become: true
   ansible.builtin.lineinfile:
     path: "/root/.bashrc"
     line: ". {{ role_path }}/files/prompt.sh"
     insertbefore: '^unset color_prompt force_color_prompt'
 
 - name: Add recursive sudo aliases
-  become: yes
+  become: true
   ansible.builtin.blockinfile:
     path: /etc/bash.bashrc
     block: |
