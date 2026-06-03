@@ -71,9 +71,10 @@
         terminal_background_opacity: "0.85"
       tags: terminal
 
-    # - ansible.builtin.import_role:
-    #     name: bash
-    #   tags: bash
+    - name: Configure bash
+      ansible.builtin.import_role:
+        name: bash
+      tags: bash
 
     # - ansible.builtin.import_role:
     #     name: zsh
