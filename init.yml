@@ -85,7 +85,3 @@
       ansible.builtin.import_role:
         name: dotfiles
       tags: dotfiles
-
-    # - ansible.builtin.import_role:
-    #     name: kubectl
-    #   tags: kubectl

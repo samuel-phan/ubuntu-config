@@ -72,9 +72,12 @@
     src: preferences.d/google-cloud-sdk
     dest: /etc/apt/preferences.d/google-cloud-sdk
 
-- name: Install gcloud CLI
+- name: Install gcloud, kubectl and kubectx
   become: true
   ansible.builtin.apt:
-    name: google-cloud-cli
+    name:
+      - google-cloud-cli
+      - kubectl
+      - kubectx
     state: latest
     update_cache: true
