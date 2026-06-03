@@ -1,0 +1,13 @@
+# Oh My Zsh
+
+- name: Install Oh My Zsh
+  ansible.builtin.shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  args:
+    creates: "{{ lookup('env', 'HOME') }}/.oh-my-zsh"
+
+# Powerlevel10k
+
+- name: Install Powerlevel10k
+  ansible.builtin.shell: git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+  args:
+    creates: "{{ lookup('env', 'HOME') }}/.oh-my-zsh/custom/themes/powerlevel10k"
