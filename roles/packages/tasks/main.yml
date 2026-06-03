@@ -14,6 +14,7 @@
       - mkvtoolnix-gui
       - neovim
       - pdfarranger
+      - ripgrep
       - seahorse
       - sysstat
       - tig
