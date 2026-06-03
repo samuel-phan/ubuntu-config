@@ -36,6 +36,13 @@
     key: /org/gnome/shell/extensions/tiling-assistant/enable-tiling-popup
     value: "false"
 
+# Windows
+
+- name: Center New Windows
+  community.general.dconf:
+    key: /org/gnome/mutter/center-new-windows
+    value: "false"
+
 # Accessibility
 
 # In GNOME Tweaks
