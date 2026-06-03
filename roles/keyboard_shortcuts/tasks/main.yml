@@ -1,0 +1,9 @@
+- name: 'Set "Maximize window vertically" keyboard shortcut to "{{ keyboard_shortcuts_maximize_vertically }}"'
+  community.general.dconf:
+    key: /org/gnome/desktop/wm/keybindings/maximize-vertically
+    value: "{{ keyboard_shortcuts_maximize_vertically }}"
+
+- name: 'Set "Maximize window horizontally" keyboard shortcut to "{{ keyboard_shortcuts_maximize_horizontally }}"'
+  community.general.dconf:
+    key: /org/gnome/desktop/wm/keybindings/maximize-horizontally
+    value: "{{ keyboard_shortcuts_maximize_horizontally }}"

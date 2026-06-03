@@ -1,0 +1,96 @@
+- name: Configuring Ubuntu 26.04
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Install packages
+      ansible.builtin.import_role:
+        name: packages
+      tags: packages
+
+    - name: Configure keyboard
+      ansible.builtin.import_role:
+        name: keyboard
+      vars:
+        keyboard_delay: "250"
+        keyboard_rate: "20"
+        keyboard_input_sources: "[('xkb', 'fr'), ('ibus', 'Unikey')]"
+      tags: keyboard
+
+    - name: Configure keyboard shortcuts
+      ansible.builtin.import_role:
+        name: keyboard_shortcuts
+      vars:
+        keyboard_shortcuts_maximize_vertically: "['<Alt>F11']"
+        keyboard_shortcuts_maximize_horizontally: "['<Alt>F12']"
+      tags: keyboard-shortcuts
+
+    - name: Configure touchpad
+      ansible.builtin.include_role:
+        name: touchpad
+        apply:
+          tags:
+            - touchpad
+      vars:
+        touchpad_tap_to_click: "false"
+        touchpad_click_method: "'fingers'"
+        touchpad_edge_scrolling_enabled: "false"
+        touchpad_two_finger_scrolling_enabled: "true"
+        touchpad_natural_scroll: "false"
+      when: has_touchpad | bool
+      tags: touchpad
+
+    - name: Configure desktop
+      ansible.builtin.import_role:
+        name: desktop
+      tags: desktop
+
+    - name: Install fonts
+      ansible.builtin.import_role:
+        name: fonts
+      tags: fonts
+
+    # - ansible.builtin.import_role:
+    #     name: gnome_extensions
+    #   vars:
+    #     gnome_extensions:
+    #       - id: 36 # https://extensions.gnome.org/extension/36/lock-keys/
+    #         enable: yes
+    #       - id: 3010 # https://extensions.gnome.org/extension/3010/system-monitor-next/
+    #         enable: yes
+    #       - id: 4709 # https://extensions.gnome.org/extension/4709/another-window-session-manager/
+    #         enable: yes
+    #       - id: 3843 # https://extensions.gnome.org/extension/3843/just-perfection/
+    #         enable: yes
+    #   tags: gnome-extensions
+
+    # - ansible.builtin.import_role:
+    #     name: terminal
+    #   vars:
+    #     terminal_profile_id: "b1dcc9dd-5262-4d8d-a863-c897e6d979b9"
+    #     terminal_use_system_font: "false"
+    #     terminal_font: "'MesloLGS NF 11'"
+    #     use_theme_colors: "false"
+    #     foreground_color: "'rgb(211,215,207)'"
+    #     background_color: "'rgb(46,52,54)'"
+    #     use_transparent_background: "false"
+    #     background_transparency_percent: "10"
+    #     terminal_color_palette: "['rgb(46,52,54)', 'rgb(204,0,0)', 'rgb(78,154,6)', 'rgb(196,160,0)', 'rgb(52,101,164)', 'rgb(117,80,123)', 'rgb(6,152,154)', 'rgb(211,215,207)', 'rgb(85,87,83)', 'rgb(239,41,41)', 'rgb(138,226,52)', 'rgb(252,233,79)', 'rgb(114,159,207)', 'rgb(173,127,168)', 'rgb(52,226,226)', 'rgb(238,238,236)']"
+    #     bold_is_bright: "true"
+    #     terminal_scrollback_lines: "100000"
+    #   tags: terminal
+
+    # - ansible.builtin.import_role:
+    #     name: bash
+    #   tags: bash
+
+    # - ansible.builtin.import_role:
+    #     name: zsh
+    #   tags: zsh
+
+    # - ansible.builtin.import_role:
+    #     name: dotfiles
+    #   tags: dotfiles
+
+    # - ansible.builtin.import_role:
+    #     name: kubectl
+    #   tags: kubectl

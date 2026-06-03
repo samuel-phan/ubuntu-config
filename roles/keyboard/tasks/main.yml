@@ -1,0 +1,24 @@
+# General
+
+- name: "Set keyboard delay to {{ keyboard_delay }} ms"
+  community.general.dconf:
+    key: /org/gnome/desktop/peripherals/keyboard/delay
+    value: "@u {{ keyboard_delay }}"
+
+- name: "Set keyboard repeat rate to {{ keyboard_rate }}"
+  community.general.dconf:
+    key: /org/gnome/desktop/peripherals/keyboard/repeat-interval
+    value: "@u {{ keyboard_rate }}"
+
+# Vietnamese keyboard
+
+- name: Install the IBus unikey package
+  become: true
+  ansible.builtin.apt:
+    name: ibus-unikey
+    state: latest
+
+- name: Add the Vietnamese (Unikey) input source
+  community.general.dconf:
+    key: /org/gnome/desktop/input-sources/sources
+    value: "@a(ss) {{ keyboard_input_sources }}"

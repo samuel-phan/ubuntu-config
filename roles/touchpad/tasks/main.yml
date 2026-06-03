@@ -1,0 +1,24 @@
+- name: 'Set the tap to click to "{{ touchpad_tap_to_click }}"'
+  community.general.dconf:
+    key: /org/gnome/desktop/peripherals/touchpad/tap-to-click
+    value: "{{ touchpad_tap_to_click }}"
+
+- name: 'Set "Click method" to "{{ touchpad_click_method }}"'
+  community.general.dconf:
+    key: /org/gnome/desktop/peripherals/touchpad/click-method
+    value: "{{ touchpad_click_method }}"
+
+- name: 'Set "Whether edge scrolling is enabled" to "{{ touchpad_edge_scrolling_enabled }}"'
+  community.general.dconf:
+    key: /org/gnome/desktop/peripherals/touchpad/edge-scrolling-enabled
+    value: "{{ touchpad_edge_scrolling_enabled }}"
+
+- name: 'Set "Whether two-finger scrolling is enabled" to "{{ touchpad_two_finger_scrolling_enabled }}"'
+  community.general.dconf:
+    key: /org/gnome/desktop/peripherals/touchpad/two-finger-scrolling-enabled
+    value: "{{ touchpad_two_finger_scrolling_enabled }}"
+
+- name: 'Set the natural scroll to "{{ touchpad_natural_scroll }}"'
+  community.general.dconf:
+    key: /org/gnome/desktop/peripherals/touchpad/natural-scroll
+    value: "{{ touchpad_natural_scroll }}"
