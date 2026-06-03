@@ -1,0 +1,55 @@
+# Microsoft fonts
+
+- name: Set Microsoft True Type Core Fonts EULA accept to true
+  become: true
+  ansible.builtin.shell: echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections
+  changed_when: false
+
+- name: Install package "ttf-mscorefonts-installer"
+  become: true
+  ansible.builtin.apt:
+    name: ttf-mscorefonts-installer
+    state: latest
+
+# Meslo Nerd fonts (for Powerlevel10k)
+
+# Nerd Font acronym variations:
+#   - LG - Line Gap
+#   - L - Large
+#   - M - Medium
+#   - S - Small
+#   - DZ - Dotted Zero
+#   - SZ - Slashed Zero
+# https://github.com/ryanoasis/nerd-fonts/wiki/FAQ-and-Troubleshooting#what-do-these-acronym-variations-in-the-font-name-mean-lg-l-m-s-dz-sz
+
+- name: "Create directory {{ fonts_meslo_dir }}"
+  become: true
+  ansible.builtin.file:
+    path: "{{ fonts_meslo_dir }}"
+    state: directory
+    owner: root
+    group: root
+    mode: '755'
+
+- name: Create temporary directory
+  ansible.builtin.tempfile:
+    state: directory
+    suffix: .fonts
+  changed_when: false
+  register: fonts_tmp_dir
+
+- name: Unarchive the Melso Nerd fonts
+  ansible.builtin.unarchive:
+    src: https://github.com/ryanoasis/nerd-fonts/releases/download/{{ fonts_meslo_version }}/Meslo.zip
+    dest: "{{ fonts_tmp_dir.path }}"
+    remote_src: yes
+  changed_when: false
+
+- name: Copy the fonts
+  become: true
+  ansible.builtin.copy:
+    src: "{{ fonts_tmp_dir.path }}/"
+    dest: "{{ fonts_meslo_dir }}"
+  notify: Rebuild font cache
+
+- ansible.builtin.meta: flush_handlers

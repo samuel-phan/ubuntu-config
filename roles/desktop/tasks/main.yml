@@ -1,0 +1,65 @@
+# Display
+
+- name: Enable night light
+  community.general.dconf:
+    key: /org/gnome/settings-daemon/plugins/color/night-light-enabled
+    value: "true"
+
+- name: Enable night light automatic schedule
+  community.general.dconf:
+    key: /org/gnome/settings-daemon/plugins/color/night-light-schedule-automatic
+    value: "true"
+
+# Power
+
+- name: Show battery percentage
+  community.general.dconf:
+    key: /org/gnome/desktop/interface/show-battery-percentage
+    value: "true"
+
+# Multitasking
+
+- name: Workspaces on all display
+  community.general.dconf:
+    key: /org/gnome/mutter/workspaces-only-on-primary
+    value: "false"
+
+# Desktop
+
+- name: Show Home folder on desktop
+  community.general.dconf:
+    key: /org/gnome/shell/extensions/ding/show-home
+    value: "false"
+
+- name: Tiling popup
+  community.general.dconf:
+    key: /org/gnome/shell/extensions/tiling-assistant/enable-tiling-popup
+    value: "false"
+
+# Accessibility
+
+# In GNOME Tweaks
+- name: Text scaling factor
+  community.general.dconf:
+    key: /org/gnome/desktop/interface/text-scaling-factor
+    value: "1.10"
+
+# Privacy & Security
+
+- name: Screensaver lock
+  community.general.dconf:
+    key: /org/gnome/desktop/screensaver/lock-enabled
+    value: "false"
+
+
+# System
+
+- name: Automatic time zone
+  community.general.dconf:
+    key: /org/gnome/desktop/datetime/automatic-timezone
+    value: "true"
+
+- name: Clock show weekday
+  community.general.dconf:
+    key: /org/gnome/desktop/interface/clock-show-weekday
+    value: "true"
