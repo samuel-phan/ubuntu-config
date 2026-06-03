@@ -26,6 +26,14 @@
       - zsh
     state: latest
 
+# APT
+
+- name: Copy the file /etc/apt/apt.conf.d/99-no-pager.conf
+  become: true
+  ansible.builtin.copy:
+    src: apt.conf.d/99-no-pager.conf
+    dest: /etc/apt/apt.conf.d/99-no-pager.conf
+
 # AWS CLI
 
 - name: Install AWS CLI snap package
