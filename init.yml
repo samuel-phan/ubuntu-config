@@ -79,9 +79,10 @@
     #     name: zsh
     #   tags: zsh
 
-    # - ansible.builtin.import_role:
-    #     name: dotfiles
-    #   tags: dotfiles
+    - name: Configure dot files
+      ansible.builtin.import_role:
+        name: dotfiles
+      tags: dotfiles
 
     # - ansible.builtin.import_role:
     #     name: kubectl

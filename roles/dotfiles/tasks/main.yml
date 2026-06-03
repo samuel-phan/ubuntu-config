@@ -1,0 +1,29 @@
+- name: "Symlink dot files"
+  ansible.builtin.file:
+    src: "{{ item }}"
+    dest: "{{ lookup('env', 'HOME') }}/{{ item | basename }}"
+    state: link
+  with_fileglob:
+    - "{{ role_path }}/files/.*"
+
+# htop
+
+- name: 'Create the directory "{{ lookup("env", "HOME") }}/.config/htop"'
+  ansible.builtin.file:
+    path: "{{ lookup('env', 'HOME') }}/.config/htop"
+    state: directory
+
+- name: 'Copy the file "{{ lookup("env", "HOME") }}/.config/htop/htoprc"'
+  ansible.builtin.copy:
+    src: htoprc
+    dest: "{{ lookup('env', 'HOME') }}/.config/htop/htoprc"
+
+# GNOME Nautilus
+
+- name: Copy the GNOME Nautilus bookmarks
+  ansible.builtin.file:
+    src: "{{ role_path }}/files/nautilus/bookmarks"
+    dest: "{{ lookup('env', 'HOME') }}/.config/gtk-3.0/bookmarks"
+    state: link
+    follow: false
+    force: true
