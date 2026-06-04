@@ -1,0 +1,126 @@
+# noqa: package-latest
+- name: Install packages for GNOME shell extensions
+  become: true
+  ansible.builtin.apt:
+    name:
+      - chrome-gnome-shell
+      - gir1.2-gtop-2.0 # required for the GNOME shell extension "system-monitor-next"
+      - gnome-shell-extension-manager
+    state: latest
+
+# noqa: var-naming[no-role-prefix]
+- name: Parse Gnome Shell version
+  ansible.builtin.shell:
+    cmd: |
+      set -o pipefail
+      gnome-shell --version | sed 's/^[^0-9.]*//' | sed 's/[^0-9]*$//'
+    executable: /bin/bash
+  register: r_gnome_extension_parse_shell_version
+  changed_when: false
+
+- name: Set Gnome Shell version as parameter
+  ansible.builtin.set_fact:
+    gnome_shell_version: "{{ r_gnome_extension_parse_shell_version.stdout }}"
+
+- name: Check if Gnome Shell was detected
+  ansible.builtin.debug:
+    msg: "Sorry - no Gnome Shell detected... exiting"
+  failed_when: true
+  when: not r_gnome_extension_parse_shell_version.stdout
+
+# noqa: var-naming[no-role-prefix]
+- name: Create a temporary directory for extensions
+  ansible.builtin.tempfile:
+    state: directory
+  register: customize_gnome_temp_dir
+  notify: Remove temporary directory for extensions
+  when: not ansible_check_mode
+
+- name: Create a list of current enabled extensions
+  ansible.builtin.shell: gnome-extensions list --enabled > "{{ customize_gnome_temp_dir.path }}/before.txt"
+  changed_when: false
+  failed_when: false
+
+- name: Load Gnome extension information
+  ansible.builtin.include_tasks: get_extension_info.yml
+  loop: "{{ gnome_extensions | default([]) }}"
+
+- name: Download GNOME Shell extensions
+  ansible.builtin.get_url:
+    url: "{{ item.url }}"
+    dest: "{{ customize_gnome_temp_dir.path }}/{{ item.name }}.zip"
+    mode: '644'
+  loop: "{{ gnome_extensions_full | default([]) }}"
+  loop_control:
+    label: "{{ item.name }}"
+  tags:
+    - extensions
+  changed_when: false
+
+- name: Create GNOME extension directories
+  ansible.builtin.file:
+    path: "{{ lookup('env', 'HOME') }}/.local/share/gnome-shell/extensions/{{ item.name }}"
+    state: directory
+    mode: '755'
+  loop: "{{ gnome_extensions_full | default([]) }}"
+  loop_control:
+    label: "{{ item.name }}"
+  tags:
+    - extensions
+
+- name: Unzip GNOME extensions
+  ansible.builtin.unarchive:
+    src: "{{ customize_gnome_temp_dir.path }}/{{ item.name }}.zip"
+    dest: "{{ lookup('env', 'HOME') }}/.local/share/gnome-shell/extensions/{{ item.name }}"
+    remote_src: true
+  loop: "{{ gnome_extensions_full | default([]) }}"
+  loop_control:
+    label: "{{ item.name }}"
+  tags:
+    - extensions
+  notify: Need to reload GNOME shell
+
+# noqa: var-naming[no-role-prefix]
+- name: Enable extensions
+  ansible.builtin.command: gnome-shell-extension-tool -e {{ item.name }}
+  when: item.enable | default(false)
+  loop: "{{ gnome_extensions_full | default([]) }}"
+  loop_control:
+    label: "{{ item.name }}"
+  register: r_gnome_enable_extension
+  changed_when: "'is now enabled' in r_gnome_enable_extension.stderr"
+  failed_when: r_gnome_enable_extension.rc != 0 and 'already enabled' not in r_gnome_enable_extension.stderr
+  tags:
+    - settings
+
+# noqa: ignore-errors
+- name: Enable extensions with newer command
+  ansible.builtin.command: gnome-extensions enable {{ item.item.name }}
+  when:
+    - item.item.enable | default(false)
+    - "'gnome-shell-extension-tool is deprecated' in item.stderr"
+  loop: "{{ r_gnome_enable_extension.results | default([]) }}"
+  loop_control:
+    label: "{{ item.item.name }}"
+  changed_when: false
+  tags:
+    - settings
+  ignore_errors: true
+
+- name: Create a list of enabled extensions
+  ansible.builtin.shell: gnome-extensions list --enabled > "{{ customize_gnome_temp_dir.path }}/after.txt"
+  changed_when: false
+  failed_when: false
+
+# noqa: var-naming[no-role-prefix]
+- name: Compare the list of enabled extensions
+  ansible.builtin.shell: |
+    set -o pipefail
+    diff --ignore-all-space "{{ customize_gnome_temp_dir.path }}/before.txt" "{{ customize_gnome_temp_dir.path }}/after.txt" | awk '/[<>]/{print $2}'
+  register: difference
+  changed_when: difference.rc != 0
+
+- name: Changes message
+  ansible.builtin.debug:
+    msg: "Changes in enabled extensions: {{ difference.stdout }}"
+  when: difference.stdout

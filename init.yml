@@ -49,19 +49,19 @@
         name: fonts
       tags: fonts
 
-    # - ansible.builtin.import_role:
-    #     name: gnome_extensions
-    #   vars:
-    #     gnome_extensions:
-    #       - id: 36 # https://extensions.gnome.org/extension/36/lock-keys/
-    #         enable: yes
-    #       - id: 3010 # https://extensions.gnome.org/extension/3010/system-monitor-next/
-    #         enable: yes
-    #       - id: 4709 # https://extensions.gnome.org/extension/4709/another-window-session-manager/
-    #         enable: yes
-    #       - id: 3843 # https://extensions.gnome.org/extension/3843/just-perfection/
-    #         enable: yes
-    #   tags: gnome-extensions
+
+    - name: Install GNOME extensions
+      ansible.builtin.import_role:
+        name: gnome
+      vars:
+        gnome_extensions:
+          # - id: 36 # https://extensions.gnome.org/extension/36/lock-keys/
+          #   enable: true
+          - id: 3010 # https://extensions.gnome.org/extension/3010/system-monitor-next/
+            enable: true
+          # - id: 3843 # https://extensions.gnome.org/extension/3843/just-perfection/
+          #   enable: true
+      tags: gnome-extensions
 
     - name: Configure Ptyxis terminal
       ansible.builtin.import_role:

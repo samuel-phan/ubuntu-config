@@ -1,0 +1,12 @@
+- name: Import tasks to install GNOME extensions
+  ansible.builtin.import_tasks:
+    file: install.yml
+
+- name: Include tasks to install GNOME extensions
+  ansible.builtin.include_tasks:
+    file: "{{ item }}"
+    apply:
+      tags: gnome-extensions-config
+  with_fileglob:
+    - "{{ role_path }}/tasks/config/*.yml"
+  tags: gnome-extensions-config

@@ -1,0 +1,31 @@
+- name: Configure the GNOME shell extension "System Monitor Next"
+  community.general.dconf:
+    key: "{{ item.key }}"
+    value: "{{ item.value }}"
+  loop:
+    - key: /org/gnome/shell/extensions/system-monitor-next-applet/icon-display
+      value: "false"
+    - key: /org/gnome/shell/extensions/system-monitor-next-applet/show-tooltip
+      value: "true"
+    - key: /org/gnome/shell/extensions/system-monitor-next-applet/rotate-labels
+      value: "true"
+    - key: /org/gnome/shell/extensions/system-monitor-next-applet/cpu-display
+      value: "true"
+    - key: /org/gnome/shell/extensions/system-monitor-next-applet/cpu-refresh-time
+      value: "1000"
+    - key: /org/gnome/shell/extensions/system-monitor-next-applet/memory-display
+      value: "true"
+    - key: /org/gnome/shell/extensions/system-monitor-next-applet/memory-refresh-time
+      value: "1000"
+    - key: /org/gnome/shell/extensions/system-monitor-next-applet/swap-display
+      value: "true"
+    - key: /org/gnome/shell/extensions/system-monitor-next-applet/swap-refresh-time
+      value: "1000"
+    - key: /org/gnome/shell/extensions/system-monitor-next-applet/net-display
+      value: "true"
+    - key: /org/gnome/shell/extensions/system-monitor-next-applet/net-refresh-time
+      value: "1000"
+    - key: /org/gnome/shell/extensions/system-monitor-next-applet/disk-display
+      value: "true"
+    - key: /org/gnome/shell/extensions/system-monitor-next-applet/disk-refresh-time
+      value: "1000"
