@@ -1,3 +1,4 @@
+# noqa: package-latest
 - name: Install base packages
   become: true
   ansible.builtin.apt:
@@ -34,6 +35,7 @@
   ansible.builtin.copy:
     src: apt.conf.d/99-no-pager.conf
     dest: /etc/apt/apt.conf.d/99-no-pager.conf
+    mode: '644'
 
 # AWS CLI
 
@@ -45,7 +47,7 @@
 
 # gcloud CLI
 
-- name: Install prerequisites for gcloud
+- name: Install prerequisites for gcloud # noqa: package-latest
   become: true
   ansible.builtin.apt:
     name:
@@ -55,6 +57,7 @@
       - curl
     state: latest
 
+# noqa: command-instead-of-module risky-shell-pipe
 - name: Import the Google Cloud public key
   become: true
   ansible.builtin.shell: curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg
@@ -66,14 +69,16 @@
   ansible.builtin.copy:
     src: sources.list.d/google-cloud-sdk.list
     dest: /etc/apt/sources.list.d/google-cloud-sdk.list
+    mode: '644'
 
 - name: Copy file /etc/apt/preferences.d/google-cloud-sdk
   become: true
   ansible.builtin.copy:
     src: preferences.d/google-cloud-sdk
     dest: /etc/apt/preferences.d/google-cloud-sdk
+    mode: '644'
 
-- name: Install gcloud, kubectl and kubectx
+- name: Install gcloud, kubectl and kubectx # noqa: package-latest
   become: true
   ansible.builtin.apt:
     name:
