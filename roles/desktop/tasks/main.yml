@@ -36,6 +36,19 @@
     key: /org/gnome/shell/extensions/tiling-assistant/enable-tiling-popup
     value: "false"
 
+# Dock bar
+
+- name: Copy the shortcut ~/.local/share/applications/Downloads.desktop
+  ansible.builtin.template:
+    src: Downloads.desktop.j2
+    dest: "{{ lookup('ansible.builtin.env', 'HOME') }}/.local/share/applications/Downloads.desktop"
+    mode: '644'
+
+- name: Set the pinned apps in the Dock bar
+  community.general.dconf:
+    key: /org/gnome/shell/favorite-apps
+    value: "{{ desktop_favorite_apps }}"
+
 # Windows
 
 - name: Center New Windows
@@ -64,7 +77,6 @@
   community.general.dconf:
     key: /org/gnome/desktop/screensaver/lock-enabled
     value: "false"
-
 
 # System
 
