@@ -1,0 +1,31 @@
+[
+  {
+    "Name": "New Curve",
+    "CurvePoints": [
+      {
+        "Temperature": 0,
+        "FanSpeed": 80
+      },
+      {
+        "Temperature": 45,
+        "FanSpeed": 80
+      },
+      {
+        "Temperature": 55,
+        "FanSpeed": 40
+      },
+      {
+        "Temperature": 65,
+        "FanSpeed": 60
+      },
+      {
+        "Temperature": 80,
+        "FanSpeed": 80
+      },
+      {
+        "Temperature": 90,
+        "FanSpeed": 100
+      }
+    ]
+  }
+]

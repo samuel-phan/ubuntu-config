@@ -1,0 +1,9 @@
+[Unit]
+Description=Set the Nvidia GPU power profile
+
+[Service]
+Type=exec
+ExecStart=/usr/local/bin/snvctl --forceOpen -g 0 -op "{{ nvidia_fan_speed_profile_file }}" -fp "{{ nvidia_fan_speed_curve_file }}"
+
+[Install]
+WantedBy=multi-user.target

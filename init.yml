@@ -94,3 +94,8 @@
       ansible.builtin.import_role:
         name: dotfiles
       tags: dotfiles
+
+    - name: Configure NVIDIA fan speed
+      ansible.builtin.import_role:
+        name: nvidia_fan_speed
+      tags: nvidia-fan-speed

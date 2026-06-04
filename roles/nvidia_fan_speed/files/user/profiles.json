@@ -1,0 +1,9 @@
+[
+  {
+    "Name": "piloupy",
+    "GpuClockOffset": 0,
+    "MemClockOffset": 0,
+    "PowerLimitMw": 125000,
+    "FanCurveName": "New Curve"
+  }
+]

@@ -1,0 +1,69 @@
+# Installation
+
+# noqa: yaml[line-length]
+- name: Add ssprea nvidia control APT repo
+  become: true
+  ansible.builtin.shell: |
+    set -o pipefail
+    curl -s --compressed "https://ssprea.github.io/snvctl-apt-repo/ubuntu/KEY.gpg" | gpg --dearmor | tee /etc/apt/trusted.gpg.d/snvctl-apt-repo.gpg > /dev/null
+    curl -s --compressed -o /etc/apt/sources.list.d/snvctl.list "https://ssprea.github.io/snvctl-apt-repo/ubuntu/snvctl.list"
+  args:
+    creates: /etc/apt/sources.list.d/snvctl.list
+
+# noqa: package-latest
+- name: Install ssprea-nvidia-control packages
+  become: true
+  ansible.builtin.apt:
+    name:
+      - ssprea-nvidia-control
+      - ssprea-nvidia-control-cli
+    state: latest
+    update_cache: true
+
+# System configuration
+
+- name: "Create the config dir {{ nvidia_fan_speed_config_dir }}"
+  become: true
+  ansible.builtin.file:
+    path: "{{ nvidia_fan_speed_config_dir }}"
+    state: directory
+    mode: '755'
+
+- name: Copy the profile & curve JSON files
+  become: true
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "{{ nvidia_fan_speed_config_dir }}/{{ item | basename }}"
+    mode: '644'
+  loop: "{{ lookup('fileglob', 'etc/*', wantlist=True) }}"
+  notify: Restart snvctl service
+
+- name: Copy the systemd unit service file
+  become: true
+  ansible.builtin.template:
+    src: "snvctl.service.j2"
+    dest: "/etc/systemd/system/snvctl.service"
+    mode: '644'
+
+- name: Start & enable the systemd snvctl.service
+  become: true
+  ansible.builtin.systemd_service:
+    name: snvctl.service
+    state: started
+    enabled: true
+    daemon_reload: true
+
+# User configuration
+
+- name: "Create the user config dir {{ nvidia_fan_speed_user_config_dir }}"
+  ansible.builtin.file:
+    path: "{{ nvidia_fan_speed_user_config_dir }}"
+    state: directory
+    mode: '755'
+
+- name: "Symlink user config files in {{ nvidia_fan_speed_user_config_dir }}"
+  ansible.builtin.file:
+    src: "{{ item }}"
+    dest: "{{ nvidia_fan_speed_user_config_dir }}/{{ item | basename }}"
+    state: link
+  loop: "{{ lookup('fileglob', '{{ role_path }}/files/user/*', wantlist=True) }}"
