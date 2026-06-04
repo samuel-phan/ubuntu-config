@@ -29,14 +29,14 @@
       - zsh
     state: latest
 
-# APT
-
-- name: Copy the file /etc/apt/apt.conf.d/99-no-pager.conf
+- name: Install Snap packages
   become: true
-  ansible.builtin.copy:
-    src: apt.conf.d/99-no-pager.conf
-    dest: /etc/apt/apt.conf.d/99-no-pager.conf
-    mode: '644'
+  community.general.snap:
+    name:
+      - discord
+      - libreoffice
+      - slack
+      - vlc
 
 # AWS CLI
 
