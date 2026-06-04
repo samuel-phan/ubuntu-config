@@ -1,5 +1,6 @@
 # General
 
+# noqa: name[template]
 - name: "Set keyboard delay to {{ keyboard_delay }} ms"
   community.general.dconf:
     key: /org/gnome/desktop/peripherals/keyboard/delay
@@ -12,7 +13,7 @@
 
 # Vietnamese keyboard
 
-- name: Install the IBus unikey package
+- name: Install the IBus unikey package # noqa: package-latest
   become: true
   ansible.builtin.apt:
     name: ibus-unikey
