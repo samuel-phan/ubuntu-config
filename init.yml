@@ -49,7 +49,6 @@
         name: fonts
       tags: fonts
 
-
     - name: Install GNOME extensions
       ansible.builtin.import_role:
         name: gnome
