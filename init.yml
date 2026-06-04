@@ -2,6 +2,13 @@
   hosts: localhost
   connection: local
   tasks:
+    - name: Configure system
+      ansible.builtin.import_role:
+        name: system
+      vars:
+        system_swappiness: "10"
+      tags: system
+
     - name: Install packages
       ansible.builtin.import_role:
         name: packages

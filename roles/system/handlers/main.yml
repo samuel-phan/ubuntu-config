@@ -1,0 +1,3 @@
+# noqa: no-changed-when
+- name: Reload sysctl
+  ansible.builtin.command: sysctl --system

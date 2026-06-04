@@ -1,0 +1,7 @@
+- name: Create sysctl file /etc/sysctl.d/99-swappiness.conf
+  become: true
+  ansible.builtin.template:
+    src: sysctl.d/99-swappiness.conf.j2
+    dest: /etc/sysctl.d/99-swappiness.conf
+    mode: '644'
+  notify: Reload sysctl
