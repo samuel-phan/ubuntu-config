@@ -7,3 +7,13 @@
   community.general.dconf:
     key: /org/gnome/desktop/wm/keybindings/maximize-horizontally
     value: "{{ keyboard_shortcuts_maximize_horizontally }}"
+
+- name: Unset "Switch to workspace above" keyboard shortcut
+  community.general.dconf:
+    key: /org/gnome/desktop/wm/keybindings/switch-to-workspace-up
+    value: "@as []"
+
+- name: Unset "Switch to workspace below" keyboard shortcut
+  community.general.dconf:
+    key: /org/gnome/desktop/wm/keybindings/switch-to-workspace-down
+    value: "@as []"
