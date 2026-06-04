@@ -7,7 +7,8 @@
 
 # Powerlevel10k
 
-- name: Install Powerlevel10k
-  ansible.builtin.shell: git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-  args:
-    creates: "{{ lookup('env', 'HOME') }}/.oh-my-zsh/custom/themes/powerlevel10k"
+- name: Install Powerlevel10k # noqa: latest[git]
+  ansible.builtin.git:
+    repo: 'https://github.com/romkatv/powerlevel10k.git'
+    dest: "{{ lookup('ansible.builtin.env', 'ZSH_CUSTOM') | default(lookup('ansible.builtin.env', 'HOME') ~ '/.oh-my-zsh/custom/themes/powerlevel10k', true) }}"
+    depth: 1
