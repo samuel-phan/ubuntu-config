@@ -2,9 +2,10 @@
 
 - name: Set Microsoft True Type Core Fonts EULA accept to true
   become: true
-  ansible.builtin.shell: echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections
+  ansible.builtin.shell: set -o pipefail && echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections
   changed_when: false
 
+# noqa: package-latest
 - name: Install package "ttf-mscorefonts-installer"
   become: true
   ansible.builtin.apt:
@@ -42,7 +43,7 @@
   ansible.builtin.unarchive:
     src: https://github.com/ryanoasis/nerd-fonts/releases/download/{{ fonts_meslo_version }}/Meslo.zip
     dest: "{{ fonts_tmp_dir.path }}"
-    remote_src: yes
+    remote_src: true
   changed_when: false
 
 - name: Copy the fonts
@@ -50,9 +51,11 @@
   ansible.builtin.copy:
     src: "{{ fonts_tmp_dir.path }}/"
     dest: "{{ fonts_meslo_dir }}"
+    mode: '644'
   notify: Rebuild font cache
 
-- ansible.builtin.meta: flush_handlers
+- name: Flush pending Ansible handlers
+  ansible.builtin.meta: flush_handlers
 
 - name: Set System font mono
   community.general.dconf:
