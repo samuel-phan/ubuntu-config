@@ -43,6 +43,13 @@
     key: /org/gnome/mutter/center-new-windows
     value: "false"
 
+# Mouse
+
+- name: Middle Click Paste
+  community.general.dconf:
+    key: /org/gnome/desktop/interface/gtk-enable-primary-paste
+    value: "true"
+
 # Accessibility
 
 # In GNOME Tweaks
