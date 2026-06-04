@@ -8,15 +8,19 @@
 
 # htop
 
+# noqa: name[template]
 - name: 'Create the directory "{{ lookup("env", "HOME") }}/.config/htop"'
   ansible.builtin.file:
     path: "{{ lookup('env', 'HOME') }}/.config/htop"
     state: directory
+    mode: '755'
 
+# noqa: name[template]
 - name: 'Copy the file "{{ lookup("env", "HOME") }}/.config/htop/htoprc"'
   ansible.builtin.copy:
     src: htoprc
     dest: "{{ lookup('env', 'HOME') }}/.config/htop/htoprc"
+    mode: '644'
 
 # GNOME Nautilus
 
