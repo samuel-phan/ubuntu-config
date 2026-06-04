@@ -1,0 +1,13 @@
+---
+- name: Remove temporary directory for extensions
+  ansible.builtin.file:
+    name: "{{ customize_gnome_temp_dir.path }}"
+    state: absent
+
+- name: Need to reload GNOME shell
+  ansible.builtin.debug:
+    msg: |
+      #######################################################################
+      # Logout to reload GNOME shell and ensure all extensions are visible! #
+      #######################################################################
+  changed_when: true
