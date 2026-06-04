@@ -5,9 +5,11 @@
     name:
       - bash-completion
       - dconf-editor
+      - flatpak
       - gimp
       - git
       - gnome-shell-extension-manager
+      - gnome-software-plugin-flatpak
       - gnome-tweaks
       - gnome-weather
       - gparted
@@ -27,6 +29,19 @@
       - vlc
       - xsel
       - zsh
+    state: latest
+
+- name: Add the Flathub Flatpak repository remote
+  community.general.flatpak_remote:
+    name: flathub
+    state: present
+    flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+
+- name: Install Flatpak packages
+  community.general.flatpak:
+    name:
+      - com.vysp3r.ProtonPlus
+      - io.podman_desktop.PodmanDesktop
     state: latest
 
 - name: Install Snap packages
