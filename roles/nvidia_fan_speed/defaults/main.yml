@@ -1,0 +1,5 @@
+nvidia_fan_speed_config_dir: /etc/snvctl
+nvidia_fan_speed_profile_file: "{{ nvidia_fan_speed_config_dir }}/profile.json"
+nvidia_fan_speed_curve_file: "{{ nvidia_fan_speed_config_dir }}/curve.json"
+
+nvidia_fan_speed_user_config_dir: "{{ lookup('ansible.builtin.env', 'HOME') }}/.snvctl-gui"
