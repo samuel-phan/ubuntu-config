@@ -27,7 +27,6 @@
       - trash-cli
       - tree
       - vim-gtk3
-      - vlc
       - xsel
       - zsh
     state: latest
@@ -43,6 +42,7 @@
     name:
       - com.vysp3r.ProtonPlus
       - io.podman_desktop.PodmanDesktop
+      - org.videolan.VLC
     state: latest
 
 - name: Install Snap packages
@@ -52,7 +52,6 @@
       - discord
       - libreoffice
       - slack
-      - vlc
 
 # AWS CLI
 
