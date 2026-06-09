@@ -4,6 +4,7 @@
   ansible.builtin.apt:
     name:
       - bash-completion
+      - curl
       - dconf-editor
       - flatpak
       - gimp
@@ -27,6 +28,7 @@
       - trash-cli
       - tree
       - vim-gtk3
+      - wget
       - xsel
       - zsh
     state: latest
@@ -65,3 +67,8 @@
 
 - name: Import gcloud-cli tasks
   ansible.builtin.import_tasks: gcloud-cli.yml
+
+# GitHub CLI
+
+- name: Import gh-cli tasks
+  ansible.builtin.import_tasks: gh-cli.yml
