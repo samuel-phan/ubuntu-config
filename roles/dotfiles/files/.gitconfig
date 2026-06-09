@@ -9,7 +9,7 @@
 	ui = auto
 [user]
 	name = Samuel Phan
-	email = samuel@quoonel.com
+	email = 1516171+samuel-phan@users.noreply.github.com
 	signingkey = 5EFD0407C6CCE93BA511325CFD202B507CBC418B
 [push]
 	default = simple
