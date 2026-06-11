@@ -10,7 +10,7 @@
 [user]
 	name = Samuel Phan
 	email = 1516171+samuel-phan@users.noreply.github.com
-	signingkey = 5EFD0407C6CCE93BA511325CFD202B507CBC418B
+	signingkey = 51732E6C8DE07059!
 [push]
 	default = simple
 	autoSetupRemote = true
