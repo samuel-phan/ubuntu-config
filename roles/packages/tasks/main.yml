@@ -6,6 +6,7 @@
       - bash-completion
       - curl
       - dconf-editor
+      - direnv
       - flatpak
       - gimp
       - git
