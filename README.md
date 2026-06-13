@@ -34,33 +34,33 @@ You have 2 choices to active the Python virtualenv:
 
 1. Manually:
 
-  ```shell
-  source .venv/bin/activate
-  ```
+    ```shell
+    source .venv/bin/activate
+    ```
 
 2. Automatically using [direnv](https://direnv.net/):
 
-  The playbook will do the configuration of direnv, but if you want to do it manually:
-
-  ```shell
-  sudo apt install direnv
-
-  mkdir -p ~/.config/direnv
-  cp roles/dotfiles/files/direnv/direnvrc ~/.config/direnv
-  ```
-
-  - Open a new shell.
-  - Check the content of [`.envrc`](.envrc):
+    The playbook will do the configuration of direnv, but if you want to do it manually:
 
     ```shell
-    cat .envrc
+    sudo apt install direnv
+
+    mkdir -p ~/.config/direnv
+    cp roles/dotfiles/files/direnv/direnvrc ~/.config/direnv
     ```
 
-  - If everything is fine, then you can allow `direnv` to automatically load the Python virtualenv when cd'ing into this repository:
+    - Open a new shell.
+    - Check the content of [`.envrc`](.envrc):
 
-    ```shell
-    direnv allow
-    ```
+        ```shell
+        cat .envrc
+        ```
+
+    - If everything is fine, then you can allow `direnv` to automatically load the Python virtualenv when cd'ing into this repository:
+
+        ```shell
+        direnv allow
+        ```
 
     If the [`.envrc`](.envrc) file changes, you need to allow it again. This is for security purpose.
 
@@ -76,16 +76,16 @@ Workaround:
 
 - You need to become root and unbecome root to not be prompted in the current shell upon sudo:
 
-  ```shell
-  sudo su
-  exit
-  ```
+    ```shell
+    sudo su
+    exit
+    ```
 
 - For some time, you can run your playbook:
 
-  ```shell
-  ansible-playbook init.yml
-  ```
+    ```shell
+    ansible-playbook init.yml
+    ```
 
 ## Developer notes
 
@@ -96,15 +96,15 @@ During development, typing the become (sudo) password for each test can be tedio
 - Create a file `become-password` with just your become password.
 - Load it in your shell:
 
-  ```shell
-  export $(grep -v '^#' .env | xargs)
-  ```
+    ```shell
+    export $(grep -v '^#' .env | xargs)
+    ```
 
 - Run the playbook:
 
-  ```shell
-  ansible-playbook init.yml
-  ```
+    ```shell
+    ansible-playbook init.yml
+    ```
 
 ### Monitor dconf changes
 
