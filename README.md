@@ -30,11 +30,39 @@ Create the Python virtualenv `.venv` for this project:
 uv sync
 ```
 
-Source it:
+You have 2 choices to active the Python virtualenv:
 
-```shell
-source .venv/bin/activate
-```
+1. Manually:
+
+  ```shell
+  source .venv/bin/activate
+  ```
+
+2. Automatically using [direnv](https://direnv.net/):
+
+  The playbook will do the configuration of direnv, but if you want to do it manually:
+
+  ```shell
+  sudo apt install direnv
+
+  mkdir -p ~/.config/direnv
+  cp roles/dotfiles/files/direnv/direnvrc ~/.config/direnv
+  ```
+
+  - Open a new shell.
+  - Check the content of [`.envrc`](.envrc):
+
+    ```shell
+    cat .envrc
+    ```
+
+  - If everything is fine, then you can allow `direnv` to automatically load the Python virtualenv when cd'ing into this repository:
+
+    ```shell
+    direnv allow
+    ```
+
+    If the [`.envrc`](.envrc) file changes, you need to allow it again. This is for security purpose.
 
 ## Run the provisioning
 
