@@ -4,7 +4,7 @@
     dest: "{{ lookup('env', 'HOME') }}/{{ item | basename }}"
     state: link
   with_fileglob:
-    - "{{ role_path }}/files/.*"
+    - "{{ role_path }}/files/dotfiles/.*"
 
 # htop
 
@@ -16,7 +16,7 @@
 
 - name: 'Copy the file "{{ lookup("env", "HOME") }}/.config/htop/htoprc"' # noqa: name[template]
   ansible.builtin.copy:
-    src: htoprc
+    src: htop/htoprc
     dest: "{{ lookup('env', 'HOME') }}/.config/htop/htoprc"
     mode: '644'
 
