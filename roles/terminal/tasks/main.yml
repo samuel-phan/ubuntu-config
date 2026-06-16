@@ -9,6 +9,16 @@
     terminal_default_profile_uuid: >-
       {{ terminal_default_profile.value | ansible.builtin.regex_replace("^'?(\w+)'?$", "\1") }}
 
+- name: Do not use system font
+  community.general.dconf:
+    key: "/org/gnome/Ptyxis/use-system-font"
+    value: "false"
+
+- name: 'Set font name to "{{ terminal_font_name }}"'
+  community.general.dconf:
+    key: "/org/gnome/Ptyxis/font-name"
+    value: "{{ terminal_font_name }}"
+
 - name: 'Set scrollback lines to "{{ terminal_scrollback_lines }}"'
   community.general.dconf:
     key: "/org/gnome/Ptyxis/Profiles/{{ terminal_default_profile_uuid }}/scrollback-lines"

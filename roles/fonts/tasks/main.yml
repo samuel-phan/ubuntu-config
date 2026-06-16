@@ -60,4 +60,4 @@
 - name: Set System font mono
   community.general.dconf:
     key: /org/gnome/desktop/interface/monospace-font-name
-    value: "'MesloLGSDZ Nerd Font Propo 11'"
+    value: "'MesloLGSDZ Nerd Font 11'"

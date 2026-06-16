@@ -114,8 +114,11 @@ source $ZSH/oh-my-zsh.sh
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# Add ~/.local/bin in $PATH
+export PATH="/home/piloupy/.local/bin:$PATH"
+
 # aws
-#export AWS_PROFILE=AdministratorAccess-856697610288
+export AWS_PROFILE=AdministratorAccess-856697610288
 complete -C '/snap/aws-cli/current/bin/aws_completer' aws
 
 # gcloud
