@@ -69,7 +69,7 @@
 - name: Text scaling factor
   community.general.dconf:
     key: /org/gnome/desktop/interface/text-scaling-factor
-    value: "1.25"
+    value: "1.00"
 
 # Privacy & Security
 
