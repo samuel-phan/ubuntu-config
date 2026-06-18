@@ -18,6 +18,7 @@
       - htop
       - imagemagick-7.q16
       - mkvtoolnix-gui
+      - nemo
       - neovim
       - pdfarranger
       - ripgrep
