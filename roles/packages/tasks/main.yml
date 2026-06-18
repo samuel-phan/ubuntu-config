@@ -46,6 +46,7 @@
     name:
       - com.makemkv.MakeMKV
       - com.vysp3r.ProtonPlus
+      - fr.handbrake.ghb
       - io.podman_desktop.PodmanDesktop
       - org.videolan.VLC
       - org.videolan.VLC.Plugin.makemkv
