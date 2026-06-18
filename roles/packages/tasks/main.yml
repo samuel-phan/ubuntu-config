@@ -44,9 +44,11 @@
 - name: Install Flatpak packages
   community.general.flatpak:
     name:
+      - com.makemkv.MakeMKV
       - com.vysp3r.ProtonPlus
       - io.podman_desktop.PodmanDesktop
       - org.videolan.VLC
+      - org.videolan.VLC.Plugin.makemkv
     state: latest
 
 - name: Install Snap packages
