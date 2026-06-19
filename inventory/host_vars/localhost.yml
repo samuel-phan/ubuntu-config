@@ -1,1 +1,4 @@
 has_touchpad: false
+
+# noqa: yaml[line-length]
+desktop_favorite_apps: "['org.gnome.Ptyxis.desktop', 'nemo.desktop', 'chrome-caidcmannjgahlnbpmidmiecjcoiiigg-Default.desktop', 'chrome-hpkkadlgbdkiimnjhfolkbcmpbmedpja-Default.desktop', 'discord_discord.desktop', 'google-chrome.desktop', 'code.desktop', 'net.lutris.battlenet-1.desktop', 'update-manager.desktop', 'org.gnome.Settings.desktop', 'net.nokyan.Resources.desktop']"

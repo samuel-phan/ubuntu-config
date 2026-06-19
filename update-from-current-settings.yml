@@ -1,0 +1,15 @@
+- name: Update Ansible config from current settings
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Read the dconf setting /org/gnome/shell/favorite-apps
+      community.general.dconf:
+        key: /org/gnome/shell/favorite-apps
+        state: read
+      register: favorite_apps
+
+    - name: Set the /org/gnome/shell/favorite-apps value in the Ansible inventory file
+      ansible.builtin.lineinfile:
+        path: "{{ playbook_dir }}/inventory/host_vars/localhost.yml"
+        regexp: '^desktop_favorite_apps:'
+        line: "desktop_favorite_apps: \"{{ favorite_apps.value }}\""
