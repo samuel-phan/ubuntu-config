@@ -57,7 +57,12 @@
 - name: Flush pending Ansible handlers
   ansible.builtin.meta: flush_handlers
 
-- name: Set System font mono
+- name: Set System Interface font
+  community.general.dconf:
+    key: /org/gnome/desktop/interface/font-name
+    value: "'Ubuntu Sans 12'"
+
+- name: Set System Monospace font
   community.general.dconf:
     key: /org/gnome/desktop/interface/monospace-font-name
-    value: "'MesloLGSDZ Nerd Font 11'"
+    value: "'MesloLGSDZ Nerd Font 12'"

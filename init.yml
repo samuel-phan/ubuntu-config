@@ -76,7 +76,7 @@
       ansible.builtin.import_role:
         name: terminal
       vars:
-        terminal_font_name: "'MesloLGSDZ Nerd Font 11'"
+        terminal_font_name: "'MesloLGSDZ Nerd Font 12'"
         terminal_scrollback_lines: "100000"
         terminal_background_opacity: "0.85"
       tags: terminal
