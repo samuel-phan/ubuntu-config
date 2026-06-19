@@ -64,6 +64,12 @@ You have 2 choices to active the Python virtualenv:
 
     If the [`.envrc`](.envrc) file changes, you need to allow it again. This is for security purpose.
 
+3. Install the Ansible collections in `.ansible/collections`:
+
+    ```shell
+    ansible-galaxy collection install -r requirements.yml
+    ```
+
 ## Run the provisioning
 
 :warning: FIXME: this command should work, but doesn't work because of https://github.com/ansible/ansible/pull/86175 (related to the `sudo-rs` package).

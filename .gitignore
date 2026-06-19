@@ -1,3 +1,9 @@
+# IDE
 /.idea/
+
+# Misc
 /tmp/
+
+# Ansible
+.ansible
 /become-password
