@@ -29,3 +29,5 @@
       value: "true"
     - key: /org/gnome/shell/extensions/system-monitor-next-applet/disk-refresh-time
       value: "1000"
+    - key: /org/gnome/shell/extensions/system-monitor-next-applet/disk-usage-style
+      value: "'bar'"
