@@ -7,6 +7,7 @@
       - curl
       - dconf-editor
       - direnv
+      - ffmpeg
       - flatpak
       - gimp
       - git
@@ -49,6 +50,7 @@
       - fr.handbrake.ghb
       - io.podman_desktop.PodmanDesktop
       - org.videolan.VLC
+      - org.videolan.VLC.Plugin.bdj
       - org.videolan.VLC.Plugin.makemkv
     state: latest
 
