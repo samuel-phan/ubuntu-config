@@ -4,11 +4,11 @@
     "CurvePoints": [
       {
         "Temperature": 0,
-        "FanSpeed": 80
+        "FanSpeed": 40
       },
       {
         "Temperature": 45,
-        "FanSpeed": 80
+        "FanSpeed": 40
       },
       {
         "Temperature": 55,
