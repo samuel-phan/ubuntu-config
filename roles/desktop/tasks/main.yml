@@ -36,6 +36,11 @@
     key: /org/gnome/shell/extensions/tiling-assistant/enable-tiling-popup
     value: "false"
 
+- name: Set the GTK theme
+  community.general.dconf:
+    key: /org/gnome/desktop/interface/gtk-theme
+    value: "'Adwaita'"
+
 # Dock bar
 
 - name: Copy the shortcut ~/.local/share/applications/Downloads.desktop
