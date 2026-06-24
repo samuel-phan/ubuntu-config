@@ -17,3 +17,13 @@
   community.general.dconf:
     key: /org/gnome/desktop/wm/keybindings/switch-to-workspace-down
     value: "@as []"
+
+- name: Set "Switch to workspace left" keyboard shortcut
+  community.general.dconf:
+    key: /org/gnome/desktop/wm/keybindings/switch-to-workspace-left
+    value: "['<Super>Page_Up', '<Super><Alt>Left', '<Control><Alt>Left']"
+
+- name: Set "Switch to workspace right" keyboard shortcut
+  community.general.dconf:
+    key: /org/gnome/desktop/wm/keybindings/switch-to-workspace-left
+    value: "['<Super>Page_Down', '<Super><Alt>Right', '<Control><Alt>Right']"
