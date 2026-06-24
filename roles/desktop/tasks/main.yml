@@ -63,6 +63,13 @@
     key: /org/gnome/desktop/interface/gtk-enable-primary-paste
     value: "true"
 
+# Sound
+
+- name: Disable event sounds
+  community.general.dconf:
+    key: /org/gnome/desktop/sound/event-sounds
+    value: "false"
+
 # Accessibility
 
 # In GNOME Tweaks
