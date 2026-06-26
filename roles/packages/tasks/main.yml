@@ -22,6 +22,9 @@
       - nemo
       - neovim
       - pdfarranger
+      - remmina
+      - remmina-plugin-rdp
+      - remmina-plugin-vnc
       - ripgrep
       - seahorse
       - sqlite3
