@@ -1,3 +1,17 @@
+# Keyboard
+
+- name: 'Set "Switch input source" keyboard shortcut to "{{ keyboard_shortcuts_switch_input_source }}"'
+  community.general.dconf:
+    key: /org/gnome/desktop/wm/keybindings/switch-input-source
+    value: "{{ keyboard_shortcuts_switch_input_source }}"
+
+- name: 'Set "Switch input source backward" keyboard shortcut to "{{ keyboard_shortcuts_switch_input_source_backward }}"'
+  community.general.dconf:
+    key: /org/gnome/desktop/wm/keybindings/switch-input-source-backward
+    value: "{{ keyboard_shortcuts_switch_input_source_backward }}"
+
+# Window
+
 - name: 'Set "Maximize window vertically" keyboard shortcut to "{{ keyboard_shortcuts_maximize_vertically }}"'
   community.general.dconf:
     key: /org/gnome/desktop/wm/keybindings/maximize-vertically

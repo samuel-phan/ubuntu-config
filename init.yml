@@ -27,6 +27,8 @@
       ansible.builtin.import_role:
         name: keyboard_shortcuts
       vars:
+        keyboard_shortcuts_switch_input_source: "['<Alt><Super>space']"
+        keyboard_shortcuts_switch_input_source_backward: "['<Shift><Alt><Super>space']"
         keyboard_shortcuts_maximize_vertically: "['<Alt>F11']"
         keyboard_shortcuts_maximize_horizontally: "['<Alt>F12']"
       tags: keyboard-shortcuts
