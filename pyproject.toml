@@ -3,7 +3,7 @@ name = "ubuntu-config"
 version = "0.1.0"
 description = "Ubuntu configuration"
 readme = "README.md"
-requires-python = "==3.13.13"
+requires-python = ">=3.13.13"
 dependencies = [
     # FIXME: Bug with more recent versions of Ansible because of the `sudo-rs` package in Ubuntu 26.04
     # https://github.com/ansible/ansible/pull/86175
