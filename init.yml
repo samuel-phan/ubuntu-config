@@ -76,6 +76,7 @@
         name: terminal
       vars:
         terminal_font_name: "'MesloLGSDZ Nerd Font 12'"
+        terminal_bold_is_bright: "true"
         terminal_scrollback_lines: "100000"
         terminal_background_opacity: "0.85"
       tags: terminal

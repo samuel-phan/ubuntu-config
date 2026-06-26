@@ -19,6 +19,11 @@
     key: "/org/gnome/Ptyxis/font-name"
     value: "{{ terminal_font_name }}"
 
+- name: 'Set "User bright colors for bold" to "{{ terminal_bold_is_bright }}"'
+  community.general.dconf:
+    key: "/org/gnome/Ptyxis/Profiles/{{ terminal_default_profile_uuid }}/bold-is-bright"
+    value: "{{ terminal_bold_is_bright }}"
+
 - name: 'Set scrollback lines to "{{ terminal_scrollback_lines }}"'
   community.general.dconf:
     key: "/org/gnome/Ptyxis/Profiles/{{ terminal_default_profile_uuid }}/scrollback-lines"
