@@ -4,8 +4,12 @@
   ansible.builtin.apt:
     name:
       - chrome-gnome-shell
-      - gir1.2-gtop-2.0 # required for the GNOME shell extension "system-monitor-next"
       - gnome-shell-extension-manager
+
+      # required for the GNOME shell extension "system-monitor-next"
+      - gir1.2-gtop-2.0
+      - gir1.2-nm-1.0
+      - gir1.2-clutter-1.0
     state: latest
 
 # noqa: var-naming[no-role-prefix]
@@ -57,51 +61,20 @@
     - extensions
   changed_when: false
 
-- name: Create GNOME extension directories
-  ansible.builtin.file:
-    path: "{{ lookup('env', 'HOME') }}/.local/share/gnome-shell/extensions/{{ item.name }}"
-    state: directory
-    mode: '755'
-  loop: "{{ gnome_extensions_full | default([]) }}"
-  loop_control:
-    label: "{{ item.name }}"
-  tags:
-    - extensions
-
-- name: Unzip GNOME extensions
-  ansible.builtin.unarchive:
-    src: "{{ customize_gnome_temp_dir.path }}/{{ item.name }}.zip"
-    dest: "{{ lookup('env', 'HOME') }}/.local/share/gnome-shell/extensions/{{ item.name }}"
-    remote_src: true
-  loop: "{{ gnome_extensions_full | default([]) }}"
-  loop_control:
-    label: "{{ item.name }}"
-  tags:
-    - extensions
-  notify: Need to reload GNOME shell
-
-# noqa: var-naming[no-role-prefix]
-- name: Enable extensions
-  ansible.builtin.command: gnome-shell-extension-tool -e {{ item.name }}
+- name: Install extensions
+  ansible.builtin.command: |
+    gnome-extensions install "{{ customize_gnome_temp_dir.path }}/{{ item.name }}.zip"
+  args:
+    creates: "{{ lookup('env', 'HOME') }}/.local/share/gnome-shell/extensions/{{ item.name }}"
   when: item.enable | default(false)
   loop: "{{ gnome_extensions_full | default([]) }}"
-  loop_control:
-    label: "{{ item.name }}"
-  register: r_gnome_enable_extension
-  changed_when: "'is now enabled' in r_gnome_enable_extension.stderr"
-  failed_when: r_gnome_enable_extension.rc != 0 and 'already enabled' not in r_gnome_enable_extension.stderr
-  tags:
-    - settings
+  notify: Need to reload GNOME shell
 
 # noqa: ignore-errors
 - name: Enable extensions with newer command
-  ansible.builtin.command: gnome-extensions enable {{ item.item.name }}
-  when:
-    - item.item.enable | default(false)
-    - "'gnome-shell-extension-tool is deprecated' in item.stderr"
-  loop: "{{ r_gnome_enable_extension.results | default([]) }}"
-  loop_control:
-    label: "{{ item.item.name }}"
+  ansible.builtin.command: gnome-extensions enable {{ item.name }}
+  when: item.enable | default(false)
+  loop: "{{ gnome_extensions_full | default([]) }}"
   changed_when: false
   tags:
     - settings
@@ -113,9 +86,8 @@
   failed_when: false
 
 # noqa: var-naming[no-role-prefix]
-- name: Compare the list of enabled extensions
+- name: Compare the list of enabled extensions # noqa: risky-shell-pipe
   ansible.builtin.shell: |
-    set -o pipefail
     diff --ignore-all-space "{{ customize_gnome_temp_dir.path }}/before.txt" "{{ customize_gnome_temp_dir.path }}/after.txt" | awk '/[<>]/{print $2}'
   register: difference
   changed_when: difference.rc != 0
