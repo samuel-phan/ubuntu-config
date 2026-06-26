@@ -86,6 +86,11 @@
         name: nautilus
       tags: nautilus
 
+    - name: Configure Nemo file browser
+      ansible.builtin.import_role:
+        name: nemo
+      tags: nemo
+
     - name: Configure bash
       ansible.builtin.import_role:
         name: bash

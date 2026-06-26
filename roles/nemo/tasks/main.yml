@@ -1,0 +1,22 @@
+- name: Configure Nemo
+  community.general.dconf:
+    key: "{{ item.key }}"
+    value: "{{ item.value }}"
+  loop:
+    - key: /org/nemo/preferences/default-folder-viewer
+      value: "'list-view'"
+    - key: /org/nemo/preferences/detect-content
+      value: "false"
+    - key: /org/nemo/preferences/show-edit-icon-toolbar
+      value: "false"
+    - key: /org/nemo/preferences/show-full-path-titles
+      value: "true"
+    - key: /org/nemo/preferences/show-open-in-terminal-toolbar
+      value: "true"
+    - key: /org/nemo/preferences/start-with-dual-pane
+      value: "true"
+    - key: /org/nemo/list-view/default-column-order
+      # noqa: yaml[line-length]
+      value: "['name', 'size', 'type', 'date_modified', 'date_created_with_time', 'date_accessed', 'date_created', 'detailed_type', 'owner', 'group', 'where', 'mime_type', 'date_modified_with_time', 'octal_permissions', 'permissions', 'selinux_context']"
+    - key: /org/nemo/list-view/default-visible-columns
+      value: "['name', 'size', 'type', 'date_modified', 'owner', 'group', 'permissions']"
