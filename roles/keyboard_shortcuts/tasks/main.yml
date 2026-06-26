@@ -39,5 +39,5 @@
 
 - name: Set "Switch to workspace right" keyboard shortcut
   community.general.dconf:
-    key: /org/gnome/desktop/wm/keybindings/switch-to-workspace-left
+    key: /org/gnome/desktop/wm/keybindings/switch-to-workspace-right
     value: "['<Super>Page_Down', '<Super><Alt>Right', '<Control><Alt>Right']"
