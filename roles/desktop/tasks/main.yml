@@ -43,6 +43,11 @@
 
 # Dock bar
 
+- name: Set Dock bar extension to false
+  community.general.dconf:
+    key: /org/gnome/shell/extensions/dash-to-dock/extend-height
+    value: "false"
+
 - name: Copy the shortcut ~/.local/share/applications/Downloads.desktop
   ansible.builtin.template:
     src: Downloads.desktop.j2
