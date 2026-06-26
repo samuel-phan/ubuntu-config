@@ -81,6 +81,11 @@
         terminal_background_opacity: "0.85"
       tags: terminal
 
+    - name: Configure Nautilus file browser
+      ansible.builtin.import_role:
+        name: nautilus
+      tags: nautilus
+
     - name: Configure bash
       ansible.builtin.import_role:
         name: bash

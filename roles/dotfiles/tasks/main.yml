@@ -33,13 +33,3 @@
     src: htop/htoprc
     dest: "{{ lookup('env', 'HOME') }}/.config/htop/htoprc"
     mode: '644'
-
-# GNOME Nautilus
-
-- name: Copy the GNOME Nautilus bookmarks
-  ansible.builtin.file:
-    src: "{{ role_path }}/files/nautilus/bookmarks"
-    dest: "{{ lookup('env', 'HOME') }}/.config/gtk-3.0/bookmarks"
-    state: link
-    follow: false
-    force: true
