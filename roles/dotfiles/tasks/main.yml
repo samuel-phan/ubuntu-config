@@ -1,3 +1,14 @@
+- name: Check "~/.zshrc" file status
+  ansible.builtin.stat:
+    path: "{{ lookup('env', 'HOME') }}/.zshrc"
+  register: dotfiles_file_data
+
+# noqa: no-changed-when
+- name: Rename "~/.zshrc" to "~/.zshrc.{{ ansible_date_time.epoch }}"
+  ansible.builtin.command: |
+    mv ~/.zshrc ~/".zshrc.{{ ansible_date_time.epoch }}"
+  when: dotfiles_file_data.stat.exists and dotfiles_file_data.stat.isreg
+
 - name: "Symlink dot files"
   ansible.builtin.file:
     src: "{{ item }}"
