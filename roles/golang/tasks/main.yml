@@ -1,0 +1,12 @@
+# noqa: package-latest
+- name: Install golang package
+  become: true
+  ansible.builtin.apt:
+    name: golang
+    state: latest
+
+- name: Get the Golang ZSH completion
+  ansible.builtin.get_url:
+    url: https://raw.githubusercontent.com/zsh-users/zsh-completions/refs/heads/master/src/_golang
+    dest: "{{ lookup('env', 'HOME') }}/.oh-my-zsh/custom/completions/_go"
+    mode: '0664'
