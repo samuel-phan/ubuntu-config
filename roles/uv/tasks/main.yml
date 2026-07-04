@@ -1,0 +1,17 @@
+# noqa: command-instead-of-module
+- name: Install uv
+  ansible.builtin.shell: set -o pipefail && curl -LsSf https://astral.sh/uv/install.sh | sh
+  args:
+    creates: "{{ lookup('env', 'HOME') }}/.local/bin/uv"
+
+- name: Generate uv zsh completion
+  ansible.builtin.shell: |
+    uv generate-shell-completion zsh > "{{ lookup('env', 'HOME') }}/.oh-my-zsh/custom/completions/_uv"
+  args:
+    creates: "{{ lookup('env', 'HOME') }}/.oh-my-zsh/custom/completions/_uv"
+
+- name: Generate uvx zsh completion
+  ansible.builtin.shell: |
+    uvx --generate-shell-completion zsh > "{{ lookup('env', 'HOME') }}/.oh-my-zsh/custom/completions/_uvx"
+  args:
+    creates: "{{ lookup('env', 'HOME') }}/.oh-my-zsh/custom/completions/_uvx"

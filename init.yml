@@ -111,6 +111,11 @@
         name: golang
       tags: golang
 
+    - name: Configure uv
+      ansible.builtin.import_role:
+        name: uv
+      tags: uv
+
     - name: Configure NVIDIA fan speed
       ansible.builtin.import_role:
         name: nvidia_fan_speed

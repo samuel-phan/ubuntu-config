@@ -169,7 +169,3 @@ export PATH="/opt/pycharm-community-2024.2.4/bin:$PATH"
 
 # tenv
 export TENV_AUTO_INSTALL=true
-
-# uv
-eval "$(uv generate-shell-completion zsh)"
-eval "$(uvx --generate-shell-completion zsh)"
