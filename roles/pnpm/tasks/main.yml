@@ -1,0 +1,9 @@
+- name: Install pnpm CLI
+  ansible.builtin.shell: set -o pipefail && curl -fsSL https://get.pnpm.io/install.sh | sh -
+  args:
+    creates: "{{ lookup('env', 'HOME') }}/.local/share/pnpm"
+
+- name: Install Node.js runtime
+  ansible.builtin.command: pnpm runtime set node latest -g
+  args:
+    creates: "{{ lookup('env', 'HOME') }}/.local/share/pnpm/bin/node"

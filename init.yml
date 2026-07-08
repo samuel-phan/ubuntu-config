@@ -116,6 +116,16 @@
         name: goreleaser
       tags: goreleaser
 
+    - name: Configure pnpm
+      ansible.builtin.import_role:
+        name: pnpm
+      tags: pnpm
+
+    - name: Configure devcontainer CLI
+      ansible.builtin.import_role:
+        name: devcontainer
+      tags: devcontainer
+
     - name: Configure uv
       ansible.builtin.import_role:
         name: uv

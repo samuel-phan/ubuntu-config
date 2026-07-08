@@ -169,3 +169,11 @@ export PATH="/opt/pycharm-community-2024.2.4/bin:$PATH"
 
 # tenv
 export TENV_AUTO_INSTALL=true
+
+# pnpm
+export PNPM_HOME="/home/piloupy/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
+esac
+# pnpm end

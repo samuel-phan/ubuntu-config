@@ -1,0 +1,5 @@
+- name: Install "devcontainer" Node.js package globally
+  community.general.pnpm:
+    name: "@devcontainers/cli"
+    state: latest
+    global: true
