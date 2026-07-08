@@ -111,6 +111,11 @@
         name: golang
       tags: golang
 
+    - name: Configure Goreleaser
+      ansible.builtin.import_role:
+        name: goreleaser
+      tags: goreleaser
+
     - name: Configure uv
       ansible.builtin.import_role:
         name: uv

@@ -1,0 +1,11 @@
+- name: Install Goreleaser # noqa: package-latest
+  become: true
+  community.general.snap:
+    name: goreleaser
+    classic: true
+
+- name: Generate Goreleaser ZSH completion
+  ansible.builtin.shell: |
+    goreleaser completion zsh > "{{ lookup('env', 'HOME') }}/.oh-my-zsh/custom/completions/_goreleaser"
+  args:
+    creates: "{{ lookup('env', 'HOME') }}/.oh-my-zsh/custom/completions/_goreleaser"
