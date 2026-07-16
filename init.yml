@@ -126,6 +126,11 @@
         name: devcontainer
       tags: devcontainer
 
+    - name: Configure tenv
+      ansible.builtin.import_role:
+        name: tenv
+      tags: tenv
+
     - name: Configure uv
       ansible.builtin.import_role:
         name: uv
