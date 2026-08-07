@@ -4,6 +4,7 @@
     creates: "{{ lookup('env', 'HOME') }}/.local/share/pnpm"
 
 - name: Install Node.js runtime
-  ansible.builtin.command: pnpm runtime set node latest -g
+  ansible.builtin.command: |
+    {{ lookup('env', 'HOME') }}/.local/share/pnpm/bin/pnpm runtime set node latest -g
   args:
     creates: "{{ lookup('env', 'HOME') }}/.local/share/pnpm/bin/node"
