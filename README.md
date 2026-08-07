@@ -93,6 +93,21 @@ Workaround:
     ansible-playbook init.yml
     ```
 
+## Things to configure manually
+
+### Visual Studio Code
+
+Go to <https://code.visualstudio.com/>.
+
+### Chrome Apps
+
+In Chrome:
+
+- Click on the Apps button in the Bookmarks bar
+- Right-click on the app to install > Install on this device
+
+This way, you can keep the Chrome App ID (used for application shortcuts).
+
 ## Developer notes
 
 ### Bypass become password
