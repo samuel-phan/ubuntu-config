@@ -46,7 +46,7 @@ You have 2 choices to active the Python virtualenv:
     sudo apt install direnv
 
     mkdir -p ~/.config/direnv
-    cp roles/dotfiles/files/direnv/direnvrc ~/.config/direnv
+    ln -s "${PWD}/roles/dotfiles/files/direnv/direnvrc" ~/.config/direnv
     ```
 
     - Open a new shell.
