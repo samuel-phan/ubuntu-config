@@ -1,0 +1,17 @@
+- name: Install Discord
+  become: true
+  community.general.snap:
+    name:
+      - discord
+
+- name: Create directory ~/.config/autostart
+  ansible.builtin.file:
+    path: "{{ lookup('ansible.builtin.env', 'HOME') }}/.config/autostart"
+    state: directory
+    mode: '0775'
+
+- name: Set Discord to auto-start on login
+  ansible.builtin.file:
+    src: /var/lib/snapd/desktop/applications/discord_discord.desktop
+    dest: "{{ lookup('ansible.builtin.env', 'HOME') }}/.config/autostart/discord_discord.desktop"
+    state: link

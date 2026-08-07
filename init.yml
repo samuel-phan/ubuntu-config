@@ -136,6 +136,11 @@
         name: uv
       tags: uv
 
+    - name: Configure Discord
+      ansible.builtin.import_role:
+        name: discord
+      tags: discord
+
     - name: Configure NVIDIA fan speed
       ansible.builtin.import_role:
         name: nvidia_fan_speed

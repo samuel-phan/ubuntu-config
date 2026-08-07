@@ -62,7 +62,6 @@
   become: true
   community.general.snap:
     name:
-      - discord
       - libreoffice
       - slack
 
