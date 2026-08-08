@@ -108,6 +108,10 @@ In Chrome:
 
 This way, you can keep the Chrome App ID (used for application shortcuts).
 
+### Lutris
+
+Go to <https://lutris.net/>.
+
 ## Developer notes
 
 ### Bypass become password
