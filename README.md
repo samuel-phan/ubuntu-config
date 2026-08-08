@@ -95,6 +95,18 @@ Workaround:
 
 ## Things to configure manually
 
+### Swap
+
+Set `/swap.img` to `32G`:
+
+```shell
+sudo swapoff /swap.img
+sudo fallocate -l 32G /swap.img
+sudo chmod 600 /swap.img
+sudo mkswap /swap.img
+sudo swapon /swap.img
+```
+
 ### Visual Studio Code
 
 Go to <https://code.visualstudio.com/>.
