@@ -26,3 +26,14 @@
     dest: /etc/sysctl.d/99-swappiness.conf
     mode: '644'
   notify: Reload sysctl
+
+# /etc/hosts
+
+- name: Add hosts in /etc/hosts
+  become: true
+  ansible.builtin.blockinfile:
+    path: /etc/hosts
+    block: |
+      192.168.1.10 brother
+      192.168.1.11 rpi3bplus
+      192.168.1.12 a5
