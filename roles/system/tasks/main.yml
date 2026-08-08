@@ -1,3 +1,13 @@
+# GRUB
+
+- name: Set GRUB timeout to 5
+  become: true
+  ansible.builtin.copy:
+    src: grub.d/timeout.cfg
+    dest: /etc/default/grub.d/timeout.cfg
+    mode: '644'
+  notify: Update GRUB
+
 # APT
 
 - name: Copy the file /etc/apt/apt.conf.d/99-no-pager.conf

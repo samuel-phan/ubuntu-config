@@ -1,3 +1,8 @@
 # noqa: no-changed-when
 - name: Reload sysctl
   ansible.builtin.command: sysctl --system
+
+# noqa: no-changed-when
+- name: Update GRUB
+  become: true
+  ansible.builtin.command: update-grub
