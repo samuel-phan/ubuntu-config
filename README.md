@@ -95,6 +95,10 @@ Workaround:
 
 ## Things to configure manually
 
+### Ubuntu drivers
+
+To configure Ubuntu drivers, like NVIDA drivers, use the `ubuntu-drivers` CLI.
+
 ### Swap
 
 Set `/swap.img` to `32G`:
