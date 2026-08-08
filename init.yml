@@ -111,6 +111,21 @@
         name: gnome_resources
       tags: gnome_resources
 
+    - name: Configure AWS CLI
+      ansible.builtin.import_role:
+        name: aws_cli
+      tags: aws_cli
+
+    - name: Configure gcloud CLI
+      ansible.builtin.import_role:
+        name: gcloud
+      tags: gcloud
+
+    - name: Configure GitHub CLI
+      ansible.builtin.import_role:
+        name: github_cli
+      tags: github_cli
+
     - name: Configure Golang
       ansible.builtin.import_role:
         name: golang

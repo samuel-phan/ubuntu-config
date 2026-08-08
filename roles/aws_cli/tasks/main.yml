@@ -1,0 +1,5 @@
+- name: Install AWS CLI snap package
+  become: true
+  community.general.snap:
+    name: aws-cli
+    classic: true
