@@ -31,7 +31,7 @@
         keyboard_shortcuts_switch_input_source_backward: "['<Shift><Alt><Super>space']"
         keyboard_shortcuts_maximize_vertically: "['<Alt>F11']"
         keyboard_shortcuts_maximize_horizontally: "['<Alt>F12']"
-      tags: keyboard-shortcuts
+      tags: keyboard_shortcuts
 
     - name: Configure touchpad
       ansible.builtin.include_role:
@@ -69,7 +69,7 @@
             enable: true
           # - id: 3843 # https://extensions.gnome.org/extension/3843/just-perfection/
           #   enable: true
-      tags: gnome-extensions
+      tags: gnome_extensions
 
     - name: Configure Ptyxis terminal
       ansible.builtin.import_role:
@@ -149,4 +149,4 @@
     - name: Configure NVIDIA fan speed
       ansible.builtin.import_role:
         name: nvidia_fan_speed
-      tags: nvidia-fan-speed
+      tags: nvidia_fan_speed
