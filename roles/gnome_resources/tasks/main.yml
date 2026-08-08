@@ -1,0 +1,16 @@
+# noqa: package-latest
+- name: Install GNOME Resources application
+  become: true
+  ansible.builtin.apt:
+    name: resources
+    state: latest
+
+- name: Set "Show usage details in the sidebar" to true
+  community.general.dconf:
+    key: /net/nokyan/Resources/sidebar-details
+    value: "true"
+
+- name: Set "Show device description in the sidebar" to true
+  community.general.dconf:
+    key: /net/nokyan/Resources/sidebar-description
+    value: "true"
