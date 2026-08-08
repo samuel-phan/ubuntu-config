@@ -151,6 +151,10 @@ To monitor which key has changed in dconf, run this:
 dconf watch /
 ```
 
+### Disable password prompt for some actions with Polkit
+
+To get the action ID, check the `/var/log/auth.log`.
+
 ### Python packages management
 
 To list the available version of a package, e.g. `ansible` package:

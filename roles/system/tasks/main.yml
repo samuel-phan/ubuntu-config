@@ -37,3 +37,11 @@
       192.168.1.10 brother
       192.168.1.11 rpi3bplus
       192.168.1.12 a5
+
+# Disable password prompts for some commands
+- name: Copy file /etc/polkit-1/rules.d/disable-passwords.rules
+  become: true
+  ansible.builtin.copy:
+    src: polkit-1/rules.d/disable-passwords.rules
+    dest: /etc/polkit-1/rules.d/disable-passwords.rules
+    mode: '644'
