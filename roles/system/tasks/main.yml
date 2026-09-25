@@ -19,6 +19,12 @@
 
 # APT
 
+- name: Install apt-file packages # noqa: package-latest
+  become: true
+  ansible.builtin.apt:
+    name: apt-file
+    state: latest
+
 - name: Copy the file /etc/apt/apt.conf.d/99-no-pager.conf
   become: true
   ansible.builtin.copy:
