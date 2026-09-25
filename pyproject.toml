@@ -10,4 +10,5 @@ dependencies = [
     # Tested against ansible-core v2.21.0: didn't work
     "ansible==11.13.0",
     "ansible-lint>=26.4.0",
+    "python-debian>=1.1.1", # needed for ansible.builtin.deb822_repository module
 ]

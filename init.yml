@@ -141,6 +141,11 @@
         name: pnpm
       tags: pnpm
 
+    - name: Configure distrobox CLI
+      ansible.builtin.import_role:
+        name: distrobox
+      tags: distrobox
+
     - name: Configure devcontainer CLI
       ansible.builtin.import_role:
         name: devcontainer

@@ -7,7 +7,6 @@
       - curl
       - dconf-editor
       - direnv
-      - distrobox
       - ffmpeg
       - flatpak
       - gimp

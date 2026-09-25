@@ -1,0 +1,17 @@
+- name: Add michel-slm Distrobox PPA
+  become: true
+  ansible.builtin.deb822_repository:
+    name: distrobox
+    types: deb
+    uris: https://ppa.launchpadcontent.net/michel-slm/distrobox/ubuntu/
+    suites: '{{ ansible_distribution_release }}'
+    components: main
+    signed_by: https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xfbca2386952eb889a5ac1263c9280886a0ae03ca
+
+# noqa: package-latest
+- name: Install Distrobox
+  become: true
+  ansible.builtin.apt:
+    name: distrobox
+    state: latest
+    update_cache: true
