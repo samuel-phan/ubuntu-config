@@ -161,11 +161,20 @@ git-clean-branches() {
     git branch -vv
 }
 
+# k3d
+if command -v k3d > /dev/null 2>&1; then
+  source <(k3d completion zsh)
+fi
+
 # kubectl
 alias k=kubectl
 
 # krew
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
+# Podman
+export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/podman/podman.sock"
+export DOCKER_SOCK="$XDG_RUNTIME_DIR/podman/podman.sock"
 
 # PyCharm
 export PATH="/opt/pycharm-community-2024.2.4/bin:$PATH"
