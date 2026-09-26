@@ -31,10 +31,15 @@
     key: /org/gnome/shell/extensions/ding/show-home
     value: "false"
 
-- name: Tiling popup
+- name: Disable tiling popup
   community.general.dconf:
     key: /org/gnome/shell/extensions/tiling-assistant/enable-tiling-popup
     value: "false"
+
+- name: Disable tile groups
+  community.general.dconf:
+    key: /org/gnome/shell/extensions/tiling-assistant/disable-tile-groups
+    value: "true"
 
 - name: Set the GTK theme
   community.general.dconf:
