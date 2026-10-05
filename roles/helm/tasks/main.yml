@@ -1,0 +1,45 @@
+- name: Download Buildkite Helm GPG key to temporary location
+  ansible.builtin.get_url:
+    url: https://packages.buildkite.com/helm-linux/helm-debian/gpgkey
+    dest: /tmp/helm.gpg
+    mode: '0644'
+
+- name: Inspect downloaded GPG key fingerprint
+  ansible.builtin.command:
+    cmd: gpg --show-keys --with-colons /tmp/helm.gpg
+  register: helm_gpg_key_info
+  changed_when: false
+
+- name: Verify GPG key fingerprint matches expected ID
+  ansible.builtin.assert:
+    that:
+      - "helm_buildkite_apt_key_id in helm_gpg_key_info.stdout"
+    fail_msg: "ERROR: Unexpected Helm APT key ID: potential key compromise"
+    success_msg: "GPG key fingerprint verified successfully"
+
+- name: Dearmor GPG key and place into keyrings directory
+  become: true
+  ansible.builtin.command:
+    cmd: gpg --dearmor -o /usr/share/keyrings/helm.gpg /tmp/helm.gpg
+    creates: /usr/share/keyrings/helm.gpg
+
+- name: Remove temporary GPG file
+  ansible.builtin.file:
+    path: /tmp/helm.gpg
+    state: absent
+  changed_when: false
+
+- name: Add Helm Debian repository
+  become: true
+  ansible.builtin.apt_repository:
+    repo: "deb [signed-by=/usr/share/keyrings/helm.gpg] https://packages.buildkite.com/helm-linux/helm-debian/any/ any main"
+    filename: helm-stable-debian
+    state: present
+    update_cache: true
+
+# noqa: package-latest
+- name: Install Helm
+  become: true
+  ansible.builtin.apt:
+    name: helm
+    state: latest

@@ -3,6 +3,7 @@
   become: true
   ansible.builtin.apt:
     name:
+      - apt-transport-https
       - bash-completion
       - curl
       - dconf-editor
@@ -16,6 +17,7 @@
       - gnome-tweaks
       - gnome-weather
       - gparted
+      - gpg
       - htop
       - imagemagick-7.q16
       - ipcalc-ng
