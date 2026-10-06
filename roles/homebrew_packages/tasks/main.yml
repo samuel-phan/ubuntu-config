@@ -1,0 +1,5 @@
+- name: Install Homebrew packages
+  community.general.homebrew:
+    name:
+      - k9s
+    state: latest

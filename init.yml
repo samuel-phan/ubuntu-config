@@ -91,11 +91,6 @@
         name: nemo
       tags: nemo
 
-    - name: Configure Homebrew
-      ansible.builtin.import_role:
-        name: homebrew
-      tags: homebrew
-
     - name: Configure bash
       ansible.builtin.import_role:
         name: bash
@@ -115,6 +110,16 @@
       ansible.builtin.import_role:
         name: gnome_resources
       tags: gnome_resources
+
+    - name: Configure Homebrew
+      ansible.builtin.import_role:
+        name: homebrew
+      tags: homebrew
+
+    - name: Configure Homebrew packages
+      ansible.builtin.import_role:
+        name: homebrew_packages
+      tags: homebrew_packages
 
     - name: Configure AWS CLI
       ansible.builtin.import_role:
