@@ -83,6 +83,9 @@ plugins=(direnv git golang kubectl)
 # ZSH completion
 fpath=(/usr/share/zsh/site-functions $fpath)
 
+# Homebrew
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration

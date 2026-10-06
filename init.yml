@@ -91,6 +91,11 @@
         name: nemo
       tags: nemo
 
+    - name: Configure Homebrew
+      ansible.builtin.import_role:
+        name: homebrew
+      tags: homebrew
+
     - name: Configure bash
       ansible.builtin.import_role:
         name: bash

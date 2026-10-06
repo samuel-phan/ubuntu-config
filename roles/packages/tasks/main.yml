@@ -5,6 +5,7 @@
     name:
       - apt-transport-https
       - bash-completion
+      - build-essential
       - curl
       - dconf-editor
       - direnv
