@@ -1,5 +1,6 @@
 - name: Install Homebrew packages
   community.general.homebrew:
     name:
+      - argocd
       - k9s
     state: latest
