@@ -146,11 +146,6 @@
         name: goreleaser
       tags: goreleaser
 
-    - name: Configure Helm
-      ansible.builtin.import_role:
-        name: helm
-      tags: helm
-
     - name: Configure pnpm
       ansible.builtin.import_role:
         name: pnpm
