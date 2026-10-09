@@ -38,3 +38,30 @@
       - kubectx
     state: latest
     update_cache: true
+
+- name: Register gcloud Python location
+  ansible.builtin.command: gcloud info --format="value(basic.python_location)"
+  register: gcloud_python_location
+  changed_when: false
+
+- name: Register gcloud Python path
+  ansible.builtin.command: gcloud info --format="value(installation.python_path)"
+  register: gcloud_python_path
+  changed_when: false
+
+- name: Split the gcloud Python path into a list
+  ansible.builtin.set_fact:
+    gcloud_python_path_list: "{{ gcloud_python_path.stdout.split(';') }}"
+  changed_when: false
+
+- name: Set the matching python path site-packages variable
+  ansible.builtin.set_fact:
+    gcloud_matching_python_path: "{{ (gcloud_python_path_list | select('match', '^.*\\/lib/python3\\..*/site-packages$') | list | first) | default(omit) }}"
+  changed_when: false
+
+- name: Install numpy for gcloud # noqa: command-instead-of-module risky-shell-pipe
+  become: true
+  ansible.builtin.command: |
+    {{ gcloud_python_location.stdout }} -m pip install numpy
+  args:
+    creates: "{{ gcloud_matching_python_path }}/numpy"
