@@ -9,6 +9,12 @@
     mv ~/.zshrc ~/".zshrc.{{ ansible_date_time.epoch }}"
   when: dotfiles_file_data.stat.exists and dotfiles_file_data.stat.isreg
 
+- name: Create "~/.terraform.d/plugin-cache" directory
+  ansible.builtin.file:
+    path: "{{ lookup('env', 'HOME') }}/.terraform.d/plugin-cache"
+    state: directory
+    mode: '755'
+
 - name: "Symlink dot files"
   ansible.builtin.file:
     src: "{{ item }}"
