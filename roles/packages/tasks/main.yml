@@ -29,6 +29,7 @@
       - pdfarranger
       - podman
       - podman-compose
+      - pwgen
       - remmina
       - remmina-plugin-rdp
       - remmina-plugin-vnc
