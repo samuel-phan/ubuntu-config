@@ -71,3 +71,4 @@
     name:
       - libreoffice
       - slack
+    state: present

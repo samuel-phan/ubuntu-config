@@ -161,6 +161,11 @@
         name: devcontainer
       tags: devcontainer
 
+    - name: Configure Pycharm Community
+      ansible.builtin.import_role:
+        name: pycharm
+      tags: pycharm
+
     - name: Configure tenv
       ansible.builtin.import_role:
         name: tenv

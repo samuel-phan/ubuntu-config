@@ -1,0 +1,6 @@
+- name: Install PyCharm Community Edition via Snap
+  become: true
+  community.general.snap:
+    name: pycharm-community
+    state: present
+    classic: true
