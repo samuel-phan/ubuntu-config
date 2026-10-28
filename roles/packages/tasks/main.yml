@@ -20,6 +20,7 @@
       - gparted
       - gpg
       - htop
+      - hyperfine
       - imagemagick-7.q16
       - ipcalc-ng
       - mintstick
