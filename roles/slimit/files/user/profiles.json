@@ -1,0 +1,17 @@
+[
+  {
+    "Name": "piloupy",
+    "GpuClockTune": {
+      "OffsetMhz": 0,
+      "PState": 0
+    },
+    "MemClockTune": {
+      "OffsetMhz": 0,
+      "PState": 0
+    },
+    "CoreVoltageOffsetMv": 0,
+    "MemVoltageOffsetMv": 0,
+    "PowerLimitMw": 125000,
+    "FanCurveName": "New Curve"
+  }
+]

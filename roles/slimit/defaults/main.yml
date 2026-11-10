@@ -1,0 +1,5 @@
+slimit_config_dir: /etc/snvctl
+slimit_profile_file: "{{ slimit_config_dir }}/profile.json"
+slimit_curve_file: "{{ slimit_config_dir }}/curve.json"
+
+slimit_user_config_dir: "{{ lookup('ansible.builtin.env', 'HOME') }}/.snvctl-gui"

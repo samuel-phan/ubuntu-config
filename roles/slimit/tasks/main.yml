@@ -11,21 +11,22 @@
     creates: /etc/apt/sources.list.d/snvctl.list
 
 # noqa: package-latest
-- name: Install ssprea-nvidia-control packages
+- name: Install slimit packages
   become: true
   ansible.builtin.apt:
     name:
-      - ssprea-nvidia-control
-      - ssprea-nvidia-control-cli
+      - slimit-gui
+      - slimit-cli
+      - slimit-daemon
     state: latest
     update_cache: true
 
 # System configuration
 
-- name: "Create the config dir {{ nvidia_fan_speed_config_dir }}"
+- name: "Create the config dir {{ slimit_config_dir }}"
   become: true
   ansible.builtin.file:
-    path: "{{ nvidia_fan_speed_config_dir }}"
+    path: "{{ slimit_config_dir }}"
     state: directory
     mode: '755'
 
@@ -33,37 +34,30 @@
   become: true
   ansible.builtin.copy:
     src: "{{ item }}"
-    dest: "{{ nvidia_fan_speed_config_dir }}/{{ item | basename }}"
+    dest: "{{ slimit_config_dir }}/{{ item | basename }}"
     mode: '644'
   loop: "{{ lookup('fileglob', 'etc/*', wantlist=True) }}"
-  notify: Restart snvctl service
+  notify: Restart slimitd service
 
-- name: Copy the systemd unit service file
-  become: true
-  ansible.builtin.template:
-    src: "snvctl.service.j2"
-    dest: "/etc/systemd/system/snvctl.service"
-    mode: '644'
-
-- name: Start & enable the systemd snvctl.service
+- name: Start & enable the systemd slimitd.service
   become: true
   ansible.builtin.systemd_service:
-    name: snvctl.service
+    name: slimitd.service
     state: started
     enabled: true
     daemon_reload: true
 
 # User configuration
 
-- name: "Create the user config dir {{ nvidia_fan_speed_user_config_dir }}"
+- name: "Create the user config dir {{ slimit_user_config_dir }}"
   ansible.builtin.file:
-    path: "{{ nvidia_fan_speed_user_config_dir }}"
+    path: "{{ slimit_user_config_dir }}"
     state: directory
     mode: '755'
 
-- name: "Symlink user config files in {{ nvidia_fan_speed_user_config_dir }}"
+- name: "Symlink user config files in {{ slimit_user_config_dir }}"
   ansible.builtin.file:
     src: "{{ item }}"
-    dest: "{{ nvidia_fan_speed_user_config_dir }}/{{ item | basename }}"
+    dest: "{{ slimit_user_config_dir }}/{{ item | basename }}"
     state: link
   loop: "{{ lookup('fileglob', '{{ role_path }}/files/user/*', wantlist=True) }}"

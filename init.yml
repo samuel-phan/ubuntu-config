@@ -181,7 +181,7 @@
         name: discord
       tags: discord
 
-    - name: Configure NVIDIA fan speed
+    - name: Configure NVIDIA fan speed (slimit)
       ansible.builtin.import_role:
-        name: nvidia_fan_speed
-      tags: nvidia_fan_speed
+        name: slimit
+      tags: slimit
